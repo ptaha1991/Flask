@@ -13,7 +13,7 @@ Articles list
 
                 {% for article_id in articles %}
                 <li class="list-group-item">
-                    <a href="{{ url_for('articles_app.details', article_id=article_id) }}">{{ articles[article_id] }}</a>
+                    <a href="{{ url_for('articles_app.details', article_id=article_id) }}">{{ articles[article_id]["title"] }}</a>
                 </li>
                 {% endfor %}
             </ul>
