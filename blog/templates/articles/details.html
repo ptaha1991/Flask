@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Article #{{ article_id }}
+{% endblock %}
+
+{% block body %}
+  <article class="blog-post">
+    <h2 class="blog-post-title mb-1">{{ article_title }}</h2>
+    <p class="blog-post-meta">by <a href="{{ url_for('users_app.details', user_id=article_author) }}">{{ article_author }}</a></p>
+    <p>{{ article_text }}</p>
+  </article>
+
+  <div>
+    <a class="btn btn-primary" href="{{ url_for('articles_app.list') }}" role="button">Back to articles list</a>
+  </div>
+{% endblock %}
