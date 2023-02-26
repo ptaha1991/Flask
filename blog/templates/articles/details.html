@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  Article #{{ article_id }}
+  Article #{{ article.id }}
 {% endblock %}
 
 {% block body %}
   <article class="blog-post">
-    <h2 class="blog-post-title mb-1">{{ article_title }}</h2>
-    <p class="blog-post-meta">by <a href="{{ url_for('users_app.details', user_id=article_author) }}">{{ article_author }}</a></p>
-    <p>{{ article_text }}</p>
+    <h2 class="blog-post-title mb-1">{{ article.title }}</h2>
+    <p class="blog-post-meta">by <a href="{{ url_for('users_app.details', user_id=article.author_id) }}">{{ article.author_id }}</a></p>
+    <p>{{ article.text }}</p>
   </article>
 
   <div>
