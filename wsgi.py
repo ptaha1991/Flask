@@ -1,3 +1,5 @@
+from werkzeug.security import generate_password_hash
+
 from blog.app import app
 from blog.models.database import db
 
@@ -28,8 +30,8 @@ def create_users():
     """
     from blog.models import User
 
-    admin = User(username="admin", is_staff=True)
-    james = User(username="james")
+    admin = User(username="admin", email="admin@admin.ru", password=generate_password_hash("admin"), is_staff=True)
+    james = User(username="james", email="james@james.ru", password=generate_password_hash("james"))
     db.session.add(admin)
     db.session.add(james)
     db.session.commit()
