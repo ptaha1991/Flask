@@ -4,14 +4,14 @@ services:
   app:
     build:
       dockerfile: ./Dockerfile
-      context: blog
+      context: .
     environment:
       SQLALCHEMY_DATABASE_URI: postgresql://user:password@pg:5432/blog
-      CONFIG_NAME: DevConfig
+      CONFIG_NAME: BaseConfig
     volumes:
     - ./blog:/app/blog
     ports:
-      - 5000:5000
+      - 8080:5010
     depends_on:
       - pg
 
