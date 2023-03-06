@@ -26,6 +26,9 @@
             <a href="{{ url_for('auth_app.login') }}" class="nav-link {% if request.endpoint == 'login' -%}active{%- endif %}">
               Login
             </a>
+            <a href="{{ url_for('auth_app.register') }}" class="nav-link {% if request.endpoint == 'register' -%}active{%- endif %}">
+              Register
+            </a>
           {% endif %}
         </div>
 

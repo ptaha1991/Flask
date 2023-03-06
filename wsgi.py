@@ -11,16 +11,6 @@ if __name__ == "__main__":
     )
 
 
-@app.cli.command("init-db")
-def init_db():
-    """
-    Run in your terminal:
-    flask init-db
-    """
-    db.create_all()
-    print("done!")
-
-
 @app.cli.command("create-users")
 def create_users():
     """
@@ -30,8 +20,22 @@ def create_users():
     """
     from blog.models import User
 
-    admin = User(username="admin", email="admin@admin.ru", password=generate_password_hash("admin"), is_staff=True)
-    james = User(username="james", email="james@james.ru", password=generate_password_hash("james"))
+    admin = User(
+        username="admin",
+        email="admin@admin.ru",
+        password=generate_password_hash("admin"),
+        is_staff=True,
+        first_name="admin",
+        last_name="admin",
+    )
+    james = User(
+        username="james",
+        email="james@james.ru",
+        password=generate_password_hash("james"),
+        first_name="james",
+        last_name="james",
+        is_staff=False,
+    )
     db.session.add(admin)
     db.session.add(james)
     db.session.commit()
