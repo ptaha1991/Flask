@@ -14,7 +14,7 @@ class User(db.Model, UserMixin):
     email = Column(String(255), unique=True)
     password = Column(db.String(255))
     is_staff = Column(Boolean, nullable=False, default=False)
-    articles = relationship("Article")
+    author = relationship("Author", uselist=False, back_populates="user")
 
     def __repr__(self):
         return f"<User #{self.id} {self.username!r}>"
