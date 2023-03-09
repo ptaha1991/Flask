@@ -9,6 +9,16 @@
 {% if user.is_staff %}
    <span class="badge bg-secondary">staff</span>
 {% endif %}
+  <h3>Author of article:</h3>
+  {% for article in user.author.articles %}
+    <ul>
+        <li>
+            <a href="{{ url_for('articles_app.details', article_id=article.id) }}">
+                {{ article.title }}
+            </a>
+        </li>
+    </ul>
+  {% endfor %}
   <div>
     <a class="btn btn-primary" href="{{ url_for('users_app.list') }}" role="button">Back to users list</a>
   </div>

@@ -13,11 +13,14 @@ Articles list
 
                 {% for article in articles %}
                 <li class="list-group-item">
-                    <a href="{{ url_for('articles_app.details', article_id=article.id) }}">{{ article.title }}</a>
+                    <a href="{{ url_for('articles_app.details', article_id=article.id) }}">{{ article.title }} by {{ article.author.user.username }}</a>
                 </li>
                 {% endfor %}
             </ul>
         </div>
+        <hr>
+        <a href="{{ url_for('articles_app.create') }}">Create new</a>
     </div>
 </div>
 {% endblock %}
+

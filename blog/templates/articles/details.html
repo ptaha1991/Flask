@@ -7,7 +7,7 @@
 {% block body %}
   <article class="blog-post">
     <h2 class="blog-post-title mb-1">{{ article.title }}</h2>
-    <p class="blog-post-meta">by <a href="{{ url_for('users_app.details', user_id=article.author_id) }}">{{ article.author_id }}</a></p>
+    <p class="blog-post-meta"> {{ article.dt_created }} by <a href="{{ url_for('users_app.details', user_id=article.author_id) }}">{{ article.author.user.username }}</a></p>
     <p>{{ article.text }}</p>
   </article>
 
