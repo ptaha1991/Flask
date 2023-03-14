@@ -1,10 +1,11 @@
 from flask import Blueprint, current_app, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm import joinedload
 from werkzeug.exceptions import NotFound
 
 from blog.forms.article import CreateArticleForm
-from blog.models import Article, Author
+from blog.models import Article, Author, Tag
 from blog.models.database import db
 
 articles_app = Blueprint("articles_app", __name__)
@@ -19,7 +20,7 @@ def articles_list():
 @articles_app.route("/<int:article_id>/", endpoint="details")
 @login_required
 def articles_details(article_id: int):
-    article = Article.query.filter_by(id=article_id).one_or_none()
+    article = Article.query.filter_by(id=article_id).options(joinedload(Article.tags)).one_or_none()
     if article is None:
         raise NotFound(f"Article #{article_id} doesn't exist!")
     return render_template("articles/details.html", article=article)
@@ -30,9 +31,14 @@ def articles_details(article_id: int):
 def create_article():
     error = None
     form = CreateArticleForm(request.form)
+    form.tags.choices = [(tag.id, tag.name) for tag in Tag.query.order_by("name")]
     if request.method == "POST" and form.validate_on_submit():
         article = Article(title=form.title.data.strip(), text=form.text.data)
         db.session.add(article)
+        if form.tags.data:
+            selected_tags = Tag.query.filter(Tag.id.in_(form.tags.data))
+            for tag in selected_tags:
+                article.tags.append(tag)
         if current_user.author:
             # use existing author if present
             article.author = current_user.author

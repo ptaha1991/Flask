@@ -7,11 +7,24 @@
 {% block body %}
   <article class="blog-post">
     <h2 class="blog-post-title mb-1">{{ article.title }}</h2>
-    <p class="blog-post-meta"> {{ article.dt_created }} by <a href="{{ url_for('users_app.details', user_id=article.author_id) }}">{{ article.author.user.username }}</a></p>
+    <p class="blog-post-meta"> {{ article.dt_created.strftime("%d %B, %Y") }} by <a href="{{ url_for('users_app.details', user_id=article.author_id) }}">{{ article.author.user.username }}</a></p>
     <p>{{ article.text }}</p>
+    {% if article.tags %}
+    <hr>
+    <div class="container text-center">
+      <div class="row row-cols-auto">Tags:
+        {% for tag in article.tags %}
+        <div class="col"><a class="btn btn-primary btn-sm" href="{{ url_for('tags_app.details', tag_id=tag.id) }}">
+            {{ tag.name }}
+            </a></div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
   </article>
-
+  <hr>
   <div>
     <a class="btn btn-primary" href="{{ url_for('articles_app.list') }}" role="button">Back to articles list</a>
   </div>
 {% endblock %}
+

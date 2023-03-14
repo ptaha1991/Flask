@@ -1,24 +1,24 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  Authors list
+  Tags list
 {% endblock %}
 
 {% block body %}
-  <h1>Authors</h1>
+  <h1>Tags</h1>
   <div>
-    {% if authors %}
+    {% if tags %}
       <ul class="list-group">
-        {% for author in authors %}
+        {% for tag in tags %}
           <li class="list-group-item">
-            #{{ author.id }} <a href="{{ url_for('users_app.details', user_id=author.user.id) }}">
-             {{ author.user.username }}
+            <a href="{{ url_for('tags_app.details', tag_id=tag.id) }}">
+              {{ tag.name }}
             </a>
           </li>
         {% endfor %}
       </ul>
     {% else %}
-      <h3>No authors yet</h3>
+      <h3>No tags yet</h3>
     {% endif %}
   </div>
 {% endblock %}

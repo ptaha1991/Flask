@@ -3,6 +3,7 @@ from datetime import datetime
 from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, Text, func
 from sqlalchemy.orm import relationship
 
+from blog.models.article_tag import article_tag_association_table
 from blog.models.database import db
 
 
@@ -17,6 +18,11 @@ class Article(db.Model):
     author_id = Column(Integer, ForeignKey("authors.id"))
 
     author = relationship("Author", back_populates="articles")
+    tags = relationship(
+        "Tag",
+        secondary=article_tag_association_table,
+        back_populates="articles",
+    )
 
     def __repr__(self):
         return "<Post %r>" % self.title
