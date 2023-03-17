@@ -26,3 +26,6 @@ class Article(db.Model):
 
     def __repr__(self):
         return "<Post %r>" % self.title
+
+    def __str__(self):
+        return self.title
