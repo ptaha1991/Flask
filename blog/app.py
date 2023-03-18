@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from flask_migrate import Migrate
 
 from blog.admin import admin
+from blog.api import init_api
 from blog.models.database import db
 from blog.views.articles import articles_app
 from blog.views.auth import auth_app, login_manager
@@ -28,6 +29,7 @@ app.config.from_object(f"blog.configs.BaseConfig")
 login_manager.init_app(app)
 db.init_app(app)
 admin.init_app(app)
+api = init_api(app)
 
 migrate = Migrate(app, db, compare_type=True, render_as_batch=True)
 
