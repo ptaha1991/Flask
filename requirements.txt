@@ -20,7 +20,6 @@ Flask-SQLAlchemy==2.5.1
 Flask-WTF==1.1.1
 greenlet==2.0.2
 idna==3.4
-isort==5.12
 itsdangerous==1.1.0
 Jinja2==2.11.3
 Mako==1.2.4
